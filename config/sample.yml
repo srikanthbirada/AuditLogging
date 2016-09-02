@@ -1,0 +1,29 @@
+filebeat:
+  prospectors:
+    -
+      paths:
+        - ::filepath
+      fields:
+        hostip: "::localipaddress"
+        cloudname: "::cloudname"
+      document_type: ::filetype_::timeadjust
+
+output:
+  logstash:
+    hosts: [::serveripaddress]
+    loadbalance: true
+    tls:
+      certificate_authorities: ["./certs/cacert.pem"]
+      certificate: "./certs/test.crt"
+      certificate_key: "./certs/test.key"
+
+logging:
+  to_syslog: false
+  to_files: true
+
+  files:
+    path: /sc/log
+    name: auditlogging.log
+    rotateeverybytes: 10485760
+    keepfiles: 7
+    level: debug
