@@ -13,9 +13,9 @@ output:
     hosts: [::serveripaddress]
     loadbalance: true
     tls:
-      certificate_authorities: ["/sc/filebeat/cacert.pem"]
-      certificate: "/sc/filebeat/test.crt"
-      certificate_key: "/sc/filebeat/test.key"
+      certificate_authorities: ["./certs/cacert.pem"]
+      certificate: "./certs/test.crt"
+      certificate_key: "./certs/test.key"
 
 logging:
   to_syslog: false
@@ -23,7 +23,7 @@ logging:
 
   files:
     path: /sc/log
-    name: filebeat.log
+    name: auditlogging.log
     rotateeverybytes: 10485760
     keepfiles: 7
     level: debug
